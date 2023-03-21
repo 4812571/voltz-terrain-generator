@@ -1,7 +1,19 @@
 [package]
-name = "your-github-user/package-name"
+name = "4812571/voltz-terrain-generator"
+description = "The Voltz terrain generator"
+license = "GPL-3.0"
+authors = ["Dylan Marsee (4812571)"]
 version = "0.1.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
+exclude = ["**"]
+include = ["src", "src/*", "default.project.json", "wally.lock", "wally.toml"]
+
 [dependencies]
+Graph = "4812571/graph@0.1.1"
+WeightedChoice = "4812571/weighted-choice@1.0.2"
+Noise2D = "4812571/noise-2d@0.1.1"
+Counter = "4812571/counter@1.0.0"
+Loader = "sleitnick/loader@2.0.0"
+TableUtil = "sleitnick/table-util@1.2.0"

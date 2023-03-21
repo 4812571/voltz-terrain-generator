@@ -1,0 +1,6 @@
+{
+    "name": "voltz-terrain-generator",
+    "tree": {
+        "$path": "src"
+    }
+}

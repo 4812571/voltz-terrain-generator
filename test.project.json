@@ -1,0 +1,19 @@
+{
+    "name": "voltz-terrain-test",
+
+    "tree": {
+        "$className": "DataModel",
+
+        "ServerScriptService": {
+            "$className": "ServerScriptService",
+
+            "Test": {
+                "$path": "test",
+
+                "Terrain": {
+                    "$path": "packaged.project.json"
+                }
+            }
+        }
+    }
+}
