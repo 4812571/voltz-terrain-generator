@@ -4,9 +4,7 @@ local Types = require(script.Parent.Parent.Types)
 type GeneratorGrids = Types.GeneratorGrids
 type TerrainGrid = Types.TerrainGrid
 
-local SpireBuilder = {}
-
-function SpireBuilder.Build(grids: GeneratorGrids): TerrainGrid
+return function(grids: GeneratorGrids): TerrainGrid
     -- Grids
     local spireGrid = grids.Spire
     local grassGrid = grids.Grass
@@ -29,5 +27,3 @@ function SpireBuilder.Build(grids: GeneratorGrids): TerrainGrid
 
     return spireWrites
 end
-
-return SpireBuilder

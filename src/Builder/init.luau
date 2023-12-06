@@ -4,27 +4,31 @@ type TerrainConfig = Types.TerrainConfig
 type TerrainRandomizers = Types.TerrainRandomizers
 type GeneratorGrids = Types.GeneratorGrids
 type TerrainGrid = Types.TerrainGrid
-
-local Loader = require(script.Parent.Parent.Loader)
+type Builder = Types.Builder
 
 local Builder = {}
 
-local loadOrder = {
-    "Island",
-    "Crystal",
-    "Spire",
-    "StarterIsland",
-    "Support",
-}
+-- local loadOrder = {
+--     "Island",
+--     "Crystal",
+--     "Spire",
+--     "StarterIsland",
+--     "Support",
+-- }
 
-function Builder.Build(grids: GeneratorGrids): TerrainGrid
-    local builders = Loader.LoadChildren(script)
+function Builder.Build(grids: GeneratorGrids, loadOrder: { Builder }?): TerrainGrid
+    loadOrder = loadOrder or {
+        require(script.Island),
+        require(script.Crystal),
+        require(script.Spire),
+        require(script.StarterIsland),
+        require(script.Support),
+    }
 
     local terrainGrid = {}
 
-    for _, builderName in loadOrder do
-        local builder = builders[builderName]
-        local resultGrid = builder.Build(grids)
+    for _, builder in loadOrder do
+        local resultGrid = builder(grids)
 
         -- Merge each result grid into the terrain grid
         for position, cellType in resultGrid do

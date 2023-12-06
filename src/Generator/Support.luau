@@ -7,14 +7,12 @@ type SupportSubGrid = Types.SupportSubGrid
 type SupportGrid = Types.SupportGrid
 type GeneratorGrids = Types.GeneratorGrids
 
-local SupportGenerator = {}
+-- SupportGenerator.Dependencies = {
+--     "SupportPoint",
+--     "StarterIslandPoint",
+-- }
 
-SupportGenerator.Dependencies = {
-    "SupportPoint",
-    "StarterIslandPoint",
-}
-
-function SupportGenerator._generateSupport(radius, isCircular, supportConfig, wellRandom: Random, ladderRandom: Random): SupportSubGrid
+local function generateSupport(radius, isCircular, supportConfig, wellRandom: Random, ladderRandom: Random): SupportSubGrid
     local support = {} :: SupportSubGrid
 
     for x = -radius, radius do
@@ -36,9 +34,9 @@ function SupportGenerator._generateSupport(radius, isCircular, supportConfig, we
     return support
 end
 
-function SupportGenerator._generateStarterSupport()
+local function generateStarterSupport()
     local support = {} :: SupportSubGrid
-    
+
     for x = -1, 1 do
         for z = -1, 1 do
             if math.sqrt(x*x + z*z) > 1 then
@@ -56,7 +54,7 @@ function SupportGenerator._generateStarterSupport()
     return support
 end
 
-function SupportGenerator.Generate(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): SupportGrid
+return function(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): SupportGrid
     -- Grids
     local supportPointGrid = grids.SupportPoint
     local starterIslandPointGrid = grids.StarterIslandPoint
@@ -76,14 +74,12 @@ function SupportGenerator.Generate(config: TerrainConfig, randomizers: TerrainRa
         local radius = radiusRandom:NextInteger(supportConfig.MinRadius, supportConfig.MaxRadius)
         local isCircular = circularRandom:NextNumber() < supportConfig.CircularChance
 
-        supportGrid[position] = SupportGenerator._generateSupport(radius, isCircular, supportConfig, wellRandom, ladderRandom)
+        supportGrid[position] = generateSupport(radius, isCircular, supportConfig, wellRandom, ladderRandom)
     end
 
     for position, _ in starterIslandPointGrid do
-        supportGrid[position] = SupportGenerator._generateStarterSupport()
+        supportGrid[position] = generateStarterSupport()
     end
 
     return supportGrid
 end
-
-return SupportGenerator

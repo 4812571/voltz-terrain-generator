@@ -7,13 +7,11 @@ type TerrainRandomizers = Types.TerrainRandomizers
 type SupportPointGrid = Types.SupportPointGrid
 type GeneratorGrids = Types.GeneratorGrids
 
-local SupportPointGenerator = {}
+-- SupportPointGenerator.Dependencies = {
+--     "Island",
+-- }
 
-SupportPointGenerator.Dependencies = {
-    "Island",
-}
-
-function SupportPointGenerator._generateMainlandSupports(supportPointGrid: SupportPointGrid, islandGrid, supportConfig)
+local function generateMainlandSupports(supportPointGrid: SupportPointGrid, islandGrid, supportConfig)
     local supportChunkGrid = ChunkGrid.new(Vector3.new(10, 10, 10))
 
     for position, _ in islandGrid do
@@ -29,13 +27,13 @@ function SupportPointGenerator._generateMainlandSupports(supportPointGrid: Suppo
     end
 end
 
-function SupportPointGenerator._generateStarterIslandSupports(supportPointGrid: SupportPointGrid, starterIslandGrid)
+local function generateStarterIslandSupports(supportPointGrid: SupportPointGrid, starterIslandGrid)
     for position, _ in starterIslandGrid do
         supportPointGrid[position] = true
     end
 end
 
-function SupportPointGenerator.Generate(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): SupportPointGrid
+return function(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): SupportPointGrid
     -- Grids
     local islandGrid = grids.Island
     local starterIslandGrid = grids.StarterIsland
@@ -55,10 +53,8 @@ function SupportPointGenerator.Generate(config: TerrainConfig, randomizers: Terr
 
     local supportPointGrid = {} :: SupportPointGrid
 
-    SupportPointGenerator._generateMainlandSupports(supportPointGrid, islandGrid, supportConfig)
-    SupportPointGenerator._generateStarterIslandSupports(supportPointGrid, starterIslandGrid)
+    generateMainlandSupports(supportPointGrid, islandGrid, supportConfig)
+    generateStarterIslandSupports(supportPointGrid, starterIslandGrid)
 
     return supportPointGrid
 end
-
-return SupportPointGenerator

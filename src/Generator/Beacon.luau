@@ -6,20 +6,18 @@ type TerrainRandomizers = Types.TerrainRandomizers
 type BeaconGrid = Types.BeaconGrid
 type GeneratorGrids = Types.GeneratorGrids
 
-local Beacon = {}
+-- Beacon.Dependencies = {
 
-Beacon.Dependencies = {
-    
-}
+-- }
 
-function Beacon.Generate(terrainConfig: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): BeaconGrid
+return function(terrainConfig: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): BeaconGrid
     -- Config
     local beaconConfig = terrainConfig.Beacon
-    
+
     local beaconGrid = {} :: BeaconGrid
 
     if beaconConfig.CentralBeacon then
-        beaconGrid[Vector3.new(0, 0, 0)] = true 
+        beaconGrid[Vector3.new(0, 0, 0)] = true
     end
 
     local beaconAngleDifference = math.rad(360 / beaconConfig.BeaconCount)
@@ -36,5 +34,3 @@ function Beacon.Generate(terrainConfig: TerrainConfig, randomizers: TerrainRando
 
     return beaconGrid
 end
-
-return Beacon

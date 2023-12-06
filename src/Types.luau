@@ -84,7 +84,7 @@ export type GrassConfig = {
 -- Terrain Config
 export type TerrainConfig = {
     -- General
-    Seed: number, 
+    Seed: number,
     CellSize: number,
 
     -- Template
@@ -112,7 +112,7 @@ export type TerrainRandomizers = {
     -- Island
     IslandGaps: Noise2D,
     IslandDepth: Noise2D,
-    
+
     -- Starter Island
     StarterIslandRadius: Noise2D,
 
@@ -152,6 +152,9 @@ export type TerrainReplacer = Replacer.Replacer
 export type TerrainReplacers = RandomChoice<TerrainReplacer>
 
 -- Generator Grids
+export type Generator = (TerrainConfig, TerrainRandomizers, GeneratorGrids) -> { [any]: any }
+
+export type GeneratorGrids = { [Generator]: { [any]: any } }
 export type IslandGrid = {
     [Vector3]: number,
 }
@@ -202,21 +205,11 @@ export type StarterIslandGrid = {
     [Vector3]: StarterIslandSubGrid,
 }
 
+-- Terrain Grids
+export type Builder = (GeneratorGrids) -> TerrainGrid
+
 export type TerrainGrid = {
     [Vector3]: CellType,
-}
-
-export type GeneratorGrids = {
-    Island: IslandGrid,
-    Beacon: BeaconGrid,
-    Crystal: CrystalGrid,
-    Spire: SpireGrid,
-    Support: SupportGrid,
-    SupportPoint: SupportPointGrid,
-    SupportHeight: SupportHeightGrid,
-    StarterIsland: StarterIslandGrid,
-    StarterIslandPoint: StarterIslandPointGrid,
-    Grass: GrassGrid,
 }
 
 export type CellGrid = {

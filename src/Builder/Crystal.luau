@@ -6,11 +6,11 @@ type TerrainGrid = Types.TerrainGrid
 
 local CrystalBuilder = {}
 
-CrystalBuilder.Dependencies = {
-    
-}
+-- CrystalBuilder.Dependencies = {
 
-function CrystalBuilder.Build(grids: GeneratorGrids): TerrainGrid
+-- }
+
+return function(grids: GeneratorGrids): TerrainGrid
     -- Grids
     local crystalGrid = grids.Crystal
 
@@ -22,5 +22,3 @@ function CrystalBuilder.Build(grids: GeneratorGrids): TerrainGrid
 
     return crystalWrites
 end
-
-return CrystalBuilder

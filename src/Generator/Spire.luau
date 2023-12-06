@@ -6,13 +6,11 @@ type TerrainRandomizers = Types.TerrainRandomizers
 type SpireGrid = Types.SpireGrid
 type GeneratorGrids = Types.GeneratorGrids
 
-local SpireGenerator = {}
+-- SpireGenerator.Dependencies = {
+--     "Island",
+-- }
 
-SpireGenerator.Dependencies = {
-    "Island",
-}
-
-function SpireGenerator._shouldGenerate(position, cityNoise, buildingNoise, alleyNoise, heightNoise, config)
+local function shouldGenerate(position, cityNoise, buildingNoise, alleyNoise, heightNoise, config)
     local isCity = cityNoise:EdgeRange(position.X, position.Z, config.Cities.Scale, config.Cities.Weight)
     local isBuilding = buildingNoise:EdgeRange(position.X, position.Z, config.Buildings.Scale, config.Buildings.Weight)
     local isAlley = alleyNoise:EdgeRange(position.X, position.Z, config.Alleys.Scale, config.Alleys.Weight)
@@ -20,7 +18,7 @@ function SpireGenerator._shouldGenerate(position, cityNoise, buildingNoise, alle
     return isCity and isBuilding and not isAlley
 end
 
-function SpireGenerator.Generate(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): SpireGrid
+return function(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): SpireGrid
     -- Grids
     local islandGrid = grids.Island
 
@@ -32,11 +30,11 @@ function SpireGenerator.Generate(config: TerrainConfig, randomizers: TerrainRand
     local buildingNoise = randomizers.SpireBuildings
     local alleyNoise = randomizers.SpireAlleys
     local heightNoise = randomizers.SpireHeight
- 
+
     local spireGrid = {}
 
     for position, _ in islandGrid do
-        if not SpireGenerator._shouldGenerate(position, cityNoise, buildingNoise, alleyNoise, heightNoise, spireConfig) then
+        if not shouldGenerate(position, cityNoise, buildingNoise, alleyNoise, heightNoise, spireConfig) then
             continue
         end
 
@@ -51,5 +49,3 @@ function SpireGenerator.Generate(config: TerrainConfig, randomizers: TerrainRand
 
     return spireGrid
 end
-
-return SpireGenerator
