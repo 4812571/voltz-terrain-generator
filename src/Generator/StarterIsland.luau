@@ -10,9 +10,9 @@ type GeneratorGrids = Types.GeneratorGrids
 
 -- local StarterIslandGenerator = {}
 
-StarterIslandGenerator.Dependencies = {
-    "StarterIslandPoint",
-}
+-- StarterIslandGenerator.Dependencies = {
+--     "StarterIslandPoint",
+-- }
 
 local function generateStarterIsland(position, terrainConfig, islandRadiusNoise: Noise2D, islandDepthNoise: Noise2D)
     -- Config
