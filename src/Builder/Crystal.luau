@@ -1,10 +1,11 @@
 --!strict
 local Types = require(script.Parent.Parent.Types)
+local Generator = script.Parent.Parent.Generator
 
 type GeneratorGrids = Types.GeneratorGrids
 type TerrainGrid = Types.TerrainGrid
 
-local Crystal = require(script.Parent.Crystal)
+local Crystal = require(Generator.Crystal)
 
 -- local CrystalBuilder = {}
 

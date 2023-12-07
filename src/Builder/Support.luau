@@ -1,11 +1,12 @@
 --!strict
 local Types = require(script.Parent.Parent.Types)
+local Generator = script.Parent.Parent.Generator
 
 type TerrainGrid = Types.TerrainGrid
 type GeneratorGrids = Types.GeneratorGrids
 
-local Support = require(script.Parent.Support)
-local SupportHeight = require(script.Parent.SupportHeight)
+local Support = require(Generator.Support)
+local SupportHeight = require(Generator.SupportHeight)
 
 -- SupportBuilder.Dependencies = {
 --     "Island",

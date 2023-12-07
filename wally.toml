@@ -3,7 +3,7 @@ name = "3065325/voltz-to-eclipsis-terrain-generator"
 description = "The Voltz terrain generator, applied to Eclipsis"
 license = "GPL-3.0"
 authors = ["Dylan Marsee (4812571)", "NPA (3065325)"]
-version = "0.1.2"
+version = "0.1.3"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 

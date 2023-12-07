@@ -1,11 +1,12 @@
 --!strict
 local Types = require(script.Parent.Parent.Types)
+local Generator = script.Parent.Parent.Generator
 
 type GeneratorGrids = Types.GeneratorGrids
 type TerrainGrid = Types.TerrainGrid
 
-local Spire = require(script.Parent.Spire)
-local Grass = require(script.Parent.Grass)
+local Spire = require(Generator.Spire)
+local Grass = require(Generator.Grass)
 
 return function(grids: GeneratorGrids): TerrainGrid
     -- Grids
