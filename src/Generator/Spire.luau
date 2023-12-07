@@ -6,6 +6,8 @@ type TerrainRandomizers = Types.TerrainRandomizers
 type SpireGrid = Types.SpireGrid
 type GeneratorGrids = Types.GeneratorGrids
 
+local Island = require(script.Parent.Island)
+
 -- SpireGenerator.Dependencies = {
 --     "Island",
 -- }
@@ -20,7 +22,7 @@ end
 
 return function(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): SpireGrid
     -- Grids
-    local islandGrid = grids.Island
+    local islandGrid = grids[Island]
 
     -- Config
     local spireConfig = config.Spire

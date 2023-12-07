@@ -8,6 +8,8 @@ type TerrainRandomizers = Types.TerrainRandomizers
 type StarterIslandGrid = Types.StarterIslandGrid
 type GeneratorGrids = Types.GeneratorGrids
 
+local StarterIslandPoint = require(script.Parent.StarterIslandPoint)
+
 -- local StarterIslandGenerator = {}
 
 -- StarterIslandGenerator.Dependencies = {
@@ -47,7 +49,7 @@ end
 
 return function(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): StarterIslandGrid
     -- Grids
-    local starterIslandPointGrid = grids.StarterIslandPoint
+    local starterIslandPointGrid = grids[StarterIslandPoint]
 
     -- Randomizers
     local islandRadiusNoise = randomizers.StarterIslandRadius

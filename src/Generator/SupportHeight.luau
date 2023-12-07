@@ -6,13 +6,16 @@ type TerrainRandomizers = Types.TerrainRandomizers
 type SupportHeightGrid = Types.SupportHeightGrid
 type GeneratorGrids = Types.GeneratorGrids
 
+local SupportPoint = require(script.Parent.SupportPoint)
+local StarterIslandPoint = require(script.Parent.StarterIslandPoint)
+
 return function(terrainConfig: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): SupportHeightGrid
     -- Config
     local supportConfig = terrainConfig.Support
 
     -- Grids
-    local supportPointGrid = grids.SupportPoint
-    local starterIslandPointGrid = grids.StarterIslandPoint
+    local supportPointGrid = grids[SupportPoint]
+    local starterIslandPointGrid = grids[StarterIslandPoint]
 
     local supportHeightGrid = {}
 

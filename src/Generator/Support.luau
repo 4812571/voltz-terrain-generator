@@ -7,6 +7,9 @@ type SupportSubGrid = Types.SupportSubGrid
 type SupportGrid = Types.SupportGrid
 type GeneratorGrids = Types.GeneratorGrids
 
+local SupportPoint = require(script.Parent.SupportPoint)
+local StarterIslandPoint = require(script.Parent.StarterIslandPoint)
+
 -- SupportGenerator.Dependencies = {
 --     "SupportPoint",
 --     "StarterIslandPoint",
@@ -56,8 +59,8 @@ end
 
 return function(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): SupportGrid
     -- Grids
-    local supportPointGrid = grids.SupportPoint
-    local starterIslandPointGrid = grids.StarterIslandPoint
+    local supportPointGrid = grids[SupportPoint]
+    local starterIslandPointGrid = grids[StarterIslandPoint]
 
     -- Config
     local supportConfig = config.Support

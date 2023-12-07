@@ -4,6 +4,8 @@ local Types = require(script.Parent.Parent.Types)
 type GeneratorGrids = Types.GeneratorGrids
 type TerrainGrid = Types.TerrainGrid
 
+local StarterIsland = require(script.Parent.StarterIsland)
+
 -- StarterIslandBuilder.Dependencies = {
 
 -- }
@@ -20,7 +22,7 @@ end
 
 return function(grids: GeneratorGrids): TerrainGrid
     -- Grids
-    local starterIslandGrid = grids.StarterIsland
+    local starterIslandGrid = grids[StarterIsland]
 
     local starterIslandWrites = {}
 
