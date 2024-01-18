@@ -6,17 +6,18 @@ type TerrainRandomizers = Types.TerrainRandomizers
 type CrystalGrid = Types.CrystalGrid
 type GeneratorGrids = Types.GeneratorGrids
 
-local CrystalGenerator = {}
+local Island = require(script.Parent.Island)
+local Spire = require(script.Parent.Spire)
 
-CrystalGenerator.Dependencies = {
-    "Island",
-    "Spire",
-}
+-- CrystalGenerator.Dependencies = {
+--     "Island",
+--     "Spire",
+-- }
 
-function CrystalGenerator.Generate(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): CrystalGrid
+return function(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): CrystalGrid
     -- Grids
-    local islandGrid = grids.Island
-    local spireGrid = grids.Spire
+    local islandGrid = grids[Island]
+    local spireGrid = grids[Spire]
 
     -- Config
     local crystalConfig = config.Crystal
@@ -40,5 +41,3 @@ function CrystalGenerator.Generate(config: TerrainConfig, randomizers: TerrainRa
 
     return crystalGrid
 end
-
-return CrystalGenerator

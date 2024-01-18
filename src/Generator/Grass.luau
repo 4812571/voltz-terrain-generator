@@ -6,15 +6,15 @@ type TerrainRandomizers = Types.TerrainRandomizers
 type GrassGrid = Types.GrassGrid
 type GeneratorGrids = Types.GeneratorGrids
 
-local GrassGenerator = {}
+local Island = require(script.Parent.Island)
 
-GrassGenerator.Dependencies = {
-    "Island",
-}
+-- GrassGenerator.Dependencies = {
+--     "Island",
+-- }
 
-function GrassGenerator.Generate(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): GrassGrid
+return function(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): GrassGrid
     -- Grids
-    local islandGrid = grids.Island
+    local islandGrid = grids[Island]
 
     -- Config
     local grassConfig = config.Grass
@@ -33,5 +33,3 @@ function GrassGenerator.Generate(config: TerrainConfig, randomizers: TerrainRand
 
     return grassGrid
 end
-
-return GrassGenerator

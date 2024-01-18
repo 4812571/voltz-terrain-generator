@@ -8,13 +8,15 @@ type TerrainRandomizers = Types.TerrainRandomizers
 type StarterIslandGrid = Types.StarterIslandGrid
 type GeneratorGrids = Types.GeneratorGrids
 
-local StarterIslandGenerator = {}
+local StarterIslandPoint = require(script.Parent.StarterIslandPoint)
 
-StarterIslandGenerator.Dependencies = {
-    "StarterIslandPoint",
-}
+-- local StarterIslandGenerator = {}
 
-function StarterIslandGenerator._generateStarterIsland(position, terrainConfig, islandRadiusNoise: Noise2D, islandDepthNoise: Noise2D)
+-- StarterIslandGenerator.Dependencies = {
+--     "StarterIslandPoint",
+-- }
+
+local function generateStarterIsland(position, terrainConfig, islandRadiusNoise: Noise2D, islandDepthNoise: Noise2D)
     -- Config
     local islandConfig = terrainConfig.Island
     local starterIslandConfig = terrainConfig.StarterIsland
@@ -45,9 +47,9 @@ function StarterIslandGenerator._generateStarterIsland(position, terrainConfig, 
     end
 end
 
-function StarterIslandGenerator.Generate(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): StarterIslandGrid
+return function(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): StarterIslandGrid
     -- Grids
-    local starterIslandPointGrid = grids.StarterIslandPoint
+    local starterIslandPointGrid = grids[StarterIslandPoint]
 
     -- Randomizers
     local islandRadiusNoise = randomizers.StarterIslandRadius
@@ -56,10 +58,8 @@ function StarterIslandGenerator.Generate(config: TerrainConfig, randomizers: Ter
     local starterIslandGrid = {}
 
     for position, _ in starterIslandPointGrid do
-        starterIslandGrid[position] = StarterIslandGenerator._generateStarterIsland(position, config, islandRadiusNoise, islandDepthNoise)
+        starterIslandGrid[position] = generateStarterIsland(position, config, islandRadiusNoise, islandDepthNoise)
     end
 
     return starterIslandGrid
 end
-    
-return StarterIslandGenerator

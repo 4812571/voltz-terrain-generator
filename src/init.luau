@@ -2,6 +2,8 @@
 local Types = require(script.Types)
 
 type TerrainConfig = Types.TerrainConfig
+type Generator = Types.Generator
+type Builder = Types.Builder
 
 -- Object Sources
 local RandomizerSource = require(script.Sources.RandomizerSource)
@@ -24,17 +26,17 @@ local Terrain = {}
 Terrain.ConsumeReplacementFolder = Consumer.ConsumeReplacementFolder
 Terrain.ConsumeSelectionFolder = Consumer.ConsumeSelectionFolder
 
-function Terrain.Generate(terrainConfig: TerrainConfig)
+function Terrain.Generate(terrainConfig: TerrainConfig, generatorOrder: { Generator }?, buildOrder: { Builder }?)
 	-- Source Objects
 	local randomizers = RandomizerSource.CreateRandomizers(terrainConfig)
 	local replacers = ReplacerSource.CreateReplacers(terrainConfig)
 	local selectors = SelectorSource.CreateSelectors(terrainConfig)
 
 	-- Generate Grids
-	local grids = Generator.Generate(terrainConfig, randomizers)
+	local grids = Generator.Generate(terrainConfig, randomizers, generatorOrder)
 
 	-- Generate Terrain Grid
-	local terrainGrid = Builder.Build(grids)
+	local terrainGrid = Builder.Build(grids, buildOrder)
 
 	-- Replace Cells
 	local replacerResult = Replacer.Replace(terrainGrid, replacers)

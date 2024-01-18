@@ -1,16 +1,17 @@
 --!strict
 local Types = require(script.Parent.Parent.Types)
+local Generator = script.Parent.Parent.Generator
 
 type GeneratorGrids = Types.GeneratorGrids
 type TerrainGrid = Types.TerrainGrid
 
-local StarterIslandBuilder = {}
+local StarterIsland = require(Generator.StarterIsland)
 
-StarterIslandBuilder.Dependencies = {
-    
-}
+-- StarterIslandBuilder.Dependencies = {
 
-function StarterIslandBuilder._buildStarterIsland(position: Vector3, starterIsland, starterIslandWrites)
+-- }
+
+local function buildStarterIsland(position: Vector3, starterIsland, starterIslandWrites)
     for offset, depth in starterIsland do
         local columnPosition = position + offset
 
@@ -20,17 +21,15 @@ function StarterIslandBuilder._buildStarterIsland(position: Vector3, starterIsla
     end
 end
 
-function StarterIslandBuilder.Build(grids: GeneratorGrids): TerrainGrid
+return function(grids: GeneratorGrids): TerrainGrid
     -- Grids
-    local starterIslandGrid = grids.StarterIsland
+    local starterIslandGrid = grids[StarterIsland]
 
     local starterIslandWrites = {}
 
     for position, starterIsland in starterIslandGrid do
-        StarterIslandBuilder._buildStarterIsland(position, starterIsland, starterIslandWrites)
+        buildStarterIsland(position, starterIsland, starterIslandWrites)
     end
 
     return starterIslandWrites
 end
-
-return StarterIslandBuilder

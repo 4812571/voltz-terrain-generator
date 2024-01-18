@@ -6,13 +6,11 @@ type TerrainRandomizers = Types.TerrainRandomizers
 type StarterIslandPointGrid = Types.StarterIslandPointGrid
 type GeneratorGrids = Types.GeneratorGrids
 
-local StarterIslandPointGenerator = {}
+-- StarterIslandPointGenerator.Dependencies = {
 
-StarterIslandPointGenerator.Dependencies = {
-    
-}
+-- }
 
-function StarterIslandPointGenerator.Generate(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): StarterIslandPointGrid
+return function(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): StarterIslandPointGrid
     -- Config
     local islandConfig = config.Island
     local starterIslandConfig = config.StarterIsland
@@ -33,5 +31,3 @@ function StarterIslandPointGenerator.Generate(config: TerrainConfig, randomizers
 
     return starterIslandPointGrid
 end
-
-return StarterIslandPointGenerator

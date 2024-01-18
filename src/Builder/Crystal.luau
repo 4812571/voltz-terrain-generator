@@ -1,18 +1,21 @@
 --!strict
 local Types = require(script.Parent.Parent.Types)
+local Generator = script.Parent.Parent.Generator
 
 type GeneratorGrids = Types.GeneratorGrids
 type TerrainGrid = Types.TerrainGrid
 
-local CrystalBuilder = {}
+local Crystal = require(Generator.Crystal)
 
-CrystalBuilder.Dependencies = {
-    
-}
+-- local CrystalBuilder = {}
 
-function CrystalBuilder.Build(grids: GeneratorGrids): TerrainGrid
+-- CrystalBuilder.Dependencies = {
+
+-- }
+
+return function(grids: GeneratorGrids): TerrainGrid
     -- Grids
-    local crystalGrid = grids.Crystal
+    local crystalGrid = grids[Crystal]
 
     local crystalWrites = {}
 
@@ -22,5 +25,3 @@ function CrystalBuilder.Build(grids: GeneratorGrids): TerrainGrid
 
     return crystalWrites
 end
-
-return CrystalBuilder

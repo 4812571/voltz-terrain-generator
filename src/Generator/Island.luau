@@ -6,16 +6,14 @@ type TerrainRandomizers = Types.TerrainRandomizers
 type IslandGrid = Types.IslandGrid
 type GeneratorGrids = Types.GeneratorGrids
 
-local IslandGenerator = {}
+-- IslandGenerator.Dependencies = {
 
-IslandGenerator.Dependencies = {
+-- }
 
-}
-
-function IslandGenerator.Generate(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): IslandGrid
+return function(config: TerrainConfig, randomizers: TerrainRandomizers, grids: GeneratorGrids): IslandGrid
 	-- Config
 	local islandConfig = config.Island
-	
+
 	-- Randomizers
 	local gapNoise = randomizers.IslandGaps
 	local depthNoise = randomizers.IslandDepth
@@ -44,5 +42,3 @@ function IslandGenerator.Generate(config: TerrainConfig, randomizers: TerrainRan
 
 	return islandGrid
 end
-
-return IslandGenerator
